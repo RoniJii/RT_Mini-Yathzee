@@ -14,8 +14,6 @@ let thrownNumbers = []
 
 export default function Gameboard() {
 
-    //bonus ei toimi. jos bonus turn pitäs olla 0
-
     const [numberOfThrowsLeft, setNumberOfThrowsLeft] = useState(NBR_OF_THROWS);
     const [selectedDices, setSelectedDices] = useState(new Array(NBR_OF_DICES + 1).fill(false, 1));
     const [selectedIcons, setSelectedIcons] = useState(new Array(NumberOfIcons + 1).fill(false, 1));
@@ -42,22 +40,12 @@ export default function Gameboard() {
         }
     }
 
-    ///npx expo install expo-font
-/*     useEffect(() => {
-        if(loaded === null) {
-            return null;
-            
-        }   
-    }, [loaded]) */
-
-
     function calculate() {
         let choosenone = thrownNumbers[selectedDices.indexOf(true)];
         let multiplier = 0;
         multiplier = 0;
             for (let x = 0; x < NBR_OF_DICES; x++) {
                 if(thrownNumbers[x] === choosenone) {
-                    //console.log(thrownNumbers[selectedDices.indexOf(true)]) Tää löytää sen mikä on valittu. Pair[i] i on se index millä etitään. Pairin sisältä pitäisi löytyy KAIKKI valitut numerot               
                     multiplier++
                 } 
             }
@@ -89,7 +77,6 @@ export default function Gameboard() {
         }
     }
 
-    //thrownNumbers saa nopan luvut JOTKA HEITETTY nyt pitäisi saaha selectatut nimet === board[i] tms
     function getDiceColor(i) {     
         if (board.every((val, i, arr) => val === arr[0])) {
             return "orange";
@@ -105,7 +92,7 @@ export default function Gameboard() {
     }
        
     function getIconColor(i) {
-        return selectedIcons[i] ? "black" : "rgba(250,0,54,0.8)"; //steelblue
+        return selectedIcons[i] ? "black" : "rgba(250,0,54,0.8)"; 
     }
     
     function selectIcon(i) {
