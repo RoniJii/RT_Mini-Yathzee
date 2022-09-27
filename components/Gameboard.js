@@ -167,7 +167,6 @@ export default function Gameboard() {
             resetGame()
         } else {
             const values = (currentValue) => currentValue === false;
-                console.log(selected)
             if (selectedDices.every(values) === false && numberOfThrowsLeft > 0 || numberOfThrowsLeft === 3 || isBonus === true|| selected === true) {  // katotaan onko kaikki dices false jos false niin sitten päästääteittää
                 setNumberOfThrowsLeft(numberOfThrowsLeft - 1);  
                 setSelected(false)                
@@ -230,10 +229,8 @@ export default function Gameboard() {
  
     useEffect(() => {
          if (Platform.OS === 'android') {
-            console.log("android");
             setIsAndroid(true);
           } else if (Platform.OS === 'web') {
-            console.log("web");
             setOutersize(13);
             setInnersize(1);
           } 
