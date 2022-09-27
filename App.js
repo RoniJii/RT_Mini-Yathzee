@@ -1,20 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Gameboard from './components/Gameboard'
+import styles from './style/style'
+import { LinearGradient } from 'expo-linear-gradient';
+import {useFonts} from 'expo-font';
 
 export default function App() {
+  const [loaded] = useFonts({
+    'Ubuntu-Light': require('./assets/fonts/Ubuntu-Light.ttf')
+  })
+  
+  if(!loaded) {
+    return null;
+  }
+  
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <LinearGradient
+        colors={['rgba(158,4,107,0.8)', 'rgba(250,0,54,0.8)']}
+        style={styles.container}>
+        <View style={styles.container}>
+          <Header />
+          <Gameboard />
+          <Footer />
+        </View>
+    </LinearGradient>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
