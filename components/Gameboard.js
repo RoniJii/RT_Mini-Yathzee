@@ -40,7 +40,7 @@ export default function Gameboard() {
         }
     }
 
-    function calculate() {
+    function calculate(i) {
         let choosenone = thrownNumbers[selectedDices.indexOf(true)];
         let multiplier = 0;
         multiplier = 0;
@@ -49,9 +49,28 @@ export default function Gameboard() {
                     multiplier++
                 } 
             }
+            
         if (isBonus === true) {
             setTotal(total + thrownNumbers[1] * NBR_OF_DICES);
             setBonus(bonus - thrownNumbers[1] * NBR_OF_DICES);
+            if (1 === i && thrownNumbers[1] === i) {
+                setOne(NBR_OF_DICES * thrownNumbers[1])
+            }
+            else if (2 === i && thrownNumbers[1] === i) {
+                setTwo(NBR_OF_DICES * thrownNumbers[1])
+            }
+            else if (3 === i && thrownNumbers[1] === i) {
+                setThree(NBR_OF_DICES * thrownNumbers[1])
+            }
+            else if (4 === i && thrownNumbers[1] === i) {
+                setFour(NBR_OF_DICES * thrownNumbers[1])
+            }
+            else if (5 === i && thrownNumbers[1] === i) {
+                setFive(NBR_OF_DICES * thrownNumbers[1])
+            }   
+            else if (6 === i && thrownNumbers[1] === i) {
+                setSix(NBR_OF_DICES * thrownNumbers[1])
+            } 
             setNumberOfThrowsLeft(0);
         } else {
             setTotal(total + choosenone * multiplier);
@@ -102,26 +121,8 @@ export default function Gameboard() {
                 setSelected(true)
                 turnsleft = turnsleft - 1
                 Icon[i] = selectedIcons[thrownNumbers[1]] = true; 
-                setSelectedIcons(Icon);     
-               if (1 === i && thrownNumbers[1] === i) {
-                    setOne(NBR_OF_DICES * thrownNumbers[1])
-                }
-                else if (2 === i && thrownNumbers[1] === i) {
-                    setTwo(NBR_OF_DICES * thrownNumbers[1])
-                }
-                else if (3 === i && thrownNumbers[1] === i) {
-                    setThree(NBR_OF_DICES * thrownNumbers[1])
-                }
-                else if (4 === i && thrownNumbers[1] === i) {
-                    setFour(NBR_OF_DICES * thrownNumbers[1])
-                }
-                else if (5 === i && thrownNumbers[1] === i) {
-                    setFive(NBR_OF_DICES * thrownNumbers[1])
-                }   
-                else if (6 === i && thrownNumbers[1] === i) {
-                    setSix(NBR_OF_DICES * thrownNumbers[1])
-                } 
-                CheckBonus();      
+                setSelectedIcons(Icon); 
+                calculate(i)          
             } else if (Icon[i] === true) { 
                 setStartText("You already selected points for " + i + ".")
             } else {
@@ -167,7 +168,7 @@ export default function Gameboard() {
             resetGame()
         } else {
             const values = (currentValue) => currentValue === false;
-            if (selectedDices.every(values) === false && numberOfThrowsLeft > 0 || numberOfThrowsLeft === 3 || isBonus === true|| selected === true) {  // katotaan onko kaikki dices false jos false niin sitten päästääteittää
+            if (selectedDices.every(values) === false && numberOfThrowsLeft > 0 || numberOfThrowsLeft === 3 || isBonus === true|| selected === true) { 
                 setNumberOfThrowsLeft(numberOfThrowsLeft - 1);  
                 setSelected(false)                
                 resetBoard()
